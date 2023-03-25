@@ -1,0 +1,112 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body{ margin: 0px; }
+    </style>
+    {{! ******************** Bootstrap Link **************************** }}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+  </head>
+  <body>
+    <section class="h-100 gradient-form" style="">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+              <div class="row g-0">
+                <div class="col-lg-6">
+
+                  <div class="card-body p-md-5 mx-md-4">
+                    <div>
+                      <h2 class="text-center">Login</h2>
+                    </div>
+                    <span class="text-danger">{{loginmsg}}</span>
+                    <span class="text-danger">{{login}}</span>
+                    <form action="/userlogin" method="post">
+
+                      <div class="form-outline mb-4">
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-control"
+                          placeholder=""
+                          name="email"
+                        />
+                        <label
+                          class="form-label"
+                          for="form2Example11"
+                        >Email</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input
+                          type="password"
+                          id="pass"
+                          name="pass"
+                          class="form-control"
+                        />
+                        <label
+                          class="form-label"
+                          for="form2Example22"
+                        >Password</label>
+                      </div>
+
+                      <div class="text-center pt-1 mb-5 pb-1">
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                        >Login</button>
+                        <button
+                          type="reset"
+                          class="btn btn-danger"
+                        >Reset</button>
+                      </div>
+
+                      <div
+                        class="d-flex align-items-center justify-content-center pb-4"
+                      >
+                        <p class="mb-0 me-2">Already have an account?</p>
+                        <a
+                          href="/registration"
+                          type="button"
+                          class="btn btn-outline-danger"
+                        >
+                          Create now
+                        </a>
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+                <div
+                  class="col-lg-6 d-flex align-items-center gradient-custom-2"
+                >
+                  <img
+                    height="500px"
+                    width="430px"
+                    src="/img/bootstrap-shop-template.jpg"
+                    alt=""
+                  />
+                  <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>
