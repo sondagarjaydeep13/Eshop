@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const userrouter = require("../router/userrouter");
 const contactrouter = require("../router/contactrouter");
 const cookieParser = require("cookie-parser");
-const port = process.env.port;
+const port = process.env.port || 3000;
 const dburl = process.env.dburl;
 
 const viewpath = path.join(__dirname, "../templetes/view");

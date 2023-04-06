@@ -7,7 +7,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 user_router.get("/", (req, resp) => {
-  resp.render("index", { login: "Login", register: "Register" });
+  const token = req.cookies.jwt;
+  if (token == undefined) {
+    resp.render("index", { login: "Login" });
+  } else {
+    resp.render("index", { logout: "Logout", logoutall: "Logout all" });
+  }
 });
 
 //*********************** Shop Page***************************** */
@@ -36,7 +41,7 @@ user_router.get("/registration", (req, resp) => {
 });
 //******************************User login page ************************/
 user_router.get("/login", (req, resp) => {
-  resp.render("login");
+  resp.render("login", { logout: "Logout" });
 });
 //****************************** Subscribe************************* */
 user_router.post("/subscribe", async (req, resp) => {
@@ -85,21 +90,58 @@ user_router.post("/userlogin", async (req, resp) => {
     const pass = req.body.pass;
     const userdata = await User.findOne({ email: email });
     const isCompare = await bcrypt.compare(pass, userdata.pass);
-    const isToken = await jwt.sign({ _id: userdata._id }, process.env.SKEY);
+
+    // const isToken = await jwt.sign({ _id: userdata._id }, process.env.SKEY);
     if (isCompare) {
-      resp.cookie("jwt", isToken);
-      resp.render("index", { logout: "Logout", logoutall: "Logout-All" });
+      const token = await userdata.generateToken();
+
+      const user = await User.findOne({ email: email });
+      // console.log(user.Tokens.length);
+      if (user.Tokens.length > 3) {
+        resp.render("login", { loginmsg: "maximum login limit exist !!!" });
+      } else {
+        resp.cookie("jwt", token);
+
+        resp.render("index", {
+          logout: "Logout",
+          logoutall: "Logout-All",
+          udata: userdata.uname,
+        });
+      }
     } else {
       resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
     }
   } catch (error) {
-    resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
+    // resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
+    console.log(error);
   }
 });
 //***************************** Logout****************************************** */
-user_router.get("/logout", (req, resp) => {
-  resp.clearCookie("jwt");
-  resp.render("index", { login: "Login", register: "Register" });
+user_router.get("/logout", auth, async (req, resp) => {
+  try {
+    const user = req.user;
+    const token = req.token;
+    user.Tokens = user.Tokens.filter((e) => {
+      return e.token != token;
+    });
+    await user.save();
+    resp.clearCookie("jwt");
+    resp.render("index", { login: "Login" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+user_router.get("/logoutall", auth, async (req, res) => {
+  const userdata = req.user;
+
+  try {
+    userdata.Tokens = [];
+    await userdata.save();
+    res.clearCookie("jwt");
+    res.render("index", { login: "Login" });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = user_router;

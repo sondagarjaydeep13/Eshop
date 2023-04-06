@@ -6,6 +6,7 @@
     <title>Document</title>
     <style>
       body{ margin: 0px; }
+
     </style>
     {{! ******************** Bootstrap Link **************************** }}
     <link
@@ -16,35 +17,31 @@
     />
 
   </head>
-  <body>
-
+  <body style="background-color: rgb(225, 142, 156);">
     <section class="h-100 gradient-form" style="">
-
       <div class="container py-5 h-100">
-
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-xl-10">
+            <div
+              style="background-color:rgb(225, 142, 156) ;"
+              class="rounded-3"
+            >
 
-            <div class="card rounded-3 text-black">
-
-              <div class="row g-0">
-                <div class="col-lg-6">
-
-                  <div class="card-body p-md-5 mx-md-4">
-
-                    <div>
+              <div class="p-md-5 mx-md-4">
+                <div>
                       <h3 class="text-center">Register</h3>
 
                     </div>
+                    <br>
 
-                    <form action="/adduser" method="post">
-                      <span class="text-success">{{rgmsg}}</span>
+                    <form style="width:300px;margin-left:250px"action="/adduser" method="post">
+                      <span class="text-success lead">{{rgmsg}}</span>
                       <div class="form-outline mb-4">
                         <input
                           type="text"
                           id="uname"
                           name="uname"
-                          class="form-control"
+                          class="form-control lead"
                           placeholder=""
                         />
                         <label
@@ -58,7 +55,7 @@
                           type="email"
                           id="email"
                           name="email"
-                          class="form-control"
+                          class="form-control lead"
                           placeholder=""
                         />
                         <label
@@ -72,7 +69,7 @@
                           type="text"
                           name="pnumber"
                           id="pnumber"
-                          class="form-control"
+                          class="form-control lead"
                           placeholder=""
                         />
                         <label
@@ -86,7 +83,7 @@
                           type="text"
                           id="pass"
                           name="pass"
-                          class="form-control"
+                          class="form-control lead"
                         />
                         <label
                           class="form-label"
@@ -118,29 +115,10 @@
 
                     </form>
 
-                  </div>
-                </div>
-                <div
-                  class="col-lg-6 d-flex align-items-center gradient-custom-2"
-                >
-                  <img
-                    height="600px"
-                    width="430px"
-                    src="/img/bootstrap-shop-template.jpg"
-                    alt=""
-                  />
-                  <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-
-                  </div>
-
-                </div>
-
-              </div>
             </div>
           </div>
         </div>
       </div>
-
     </section>
 
   </body>

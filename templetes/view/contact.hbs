@@ -214,9 +214,9 @@
       <div class="row px-xl-5">
         <div class="col-lg-7 mb-5">
           <div class="contact-form">
-          <span class="text-success">{{contactmsg}}</span>
-          <span class="text-danger">{{contactmsgwarn}}</span>
-            <form action="/userqueries" method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+          <span class="text-success lead">{{contactmsg}}</span>
+          <span class="text-danger lead">{{contactmsgwarg}}</span>
+            <form action="/userqueries" method="post" enctype="multipart/form-data" name="sentMessage" id="contactForm" novalidate="novalidate">
               <div class="control-group">
                 <input
                   type="text"
@@ -248,6 +248,18 @@
                   id="subject"
                   name="subject"
                   placeholder="Subject"
+                  required="required"
+                  data-validation-required-message="Please enter a subject"
+                />
+                <p class="help-block text-danger"></p>
+              </div>
+               <div class="control-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="file"
+                  name="file"
+                  placeholder="Attach file"
                   required="required"
                   data-validation-required-message="Please enter a subject"
                 />

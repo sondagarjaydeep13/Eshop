@@ -5,5 +5,8 @@ const contactSchema = new mongoose.Schema({
   email: String,
   subject: String,
   message: String,
+  img: {
+    type: String,
+  },
 });
 module.exports = mongoose.model("ContactUser", contactSchema);

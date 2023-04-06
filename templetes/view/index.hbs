@@ -37,11 +37,19 @@
       <div class="row bg-secondary py-2 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
           <div class="d-inline-flex align-items-center">
+            <a class="text-dark" value="" href="#">{{udata}}</a>
+            <span class="text-muted px-2">|</span>
             <a class="text-dark" href="">FAQs</a>
             <span class="text-muted px-2">|</span>
             <a class="text-dark" href="">Help</a>
             <span class="text-muted px-2">|</span>
             <a class="text-dark" href="">Support</a>
+            <span class="text-muted px-2">|</span>
+            <a href="/login" class="text-dark">{{login}}</a>
+            <span class="text-muted px-2">|</span>
+            <a href="/logout" class="text-dark">{{logout}}</a>
+            <span class="text-muted px-2">|</span>
+            <a href="/logoutall" class="text-dark">{{logoutall}}</a>
           </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
@@ -182,20 +190,21 @@
                 <a href="/contact" class="nav-item nav-link">Contact</a>
               </div>
               <div class="navbar-nav ml-auto py-0">
-                <a href="/login" class="nav-item nav-link">{{login}}</a>
-                <a href="/logout" class="nav-item nav-link">{{logout}}</a>
-                <a
+
+                {{! <a href="/registration" class="nav-item nav-link">Register</a> }}
+                {{!-- <a
                   href="/registration"
                   class="nav-item nav-link"
-                >{{register}}</a>
-                <a
-                  href="/registration"
-                  class="nav-item nav-link"
-                >{{logoutall}}</a>
+                >{{logoutall}}</a> --}}
               </div>
             </div>
           </nav>
-          <div id="header-carousel" class="carousel slide" data-ride="carousel">
+          <div
+            style="margin-top:10px"
+            id="header-carousel"
+            class="carousel slide"
+            data-ride="carousel"
+          >
             <div class="carousel-inner">
               <div class="carousel-item active" style="height: 410px;">
                 <img class="img-fluid" src="/img/carousel-1.jpg" alt="Image" />
@@ -702,8 +711,8 @@
               </div>
             </div>
           </form>
-          <span class="text-success">{{staymsg}}</span>
-          <span class="text-danger">{{staymsgwarn}}</span>
+          <span class="text-success lead">{{staymsg}}</span>
+          <span class="text-danger lead">{{staymsgwarn}}</span>
         </div>
       </div>
     </div>
@@ -1031,8 +1040,8 @@
                   >Subscribe Now</button>
                 </div>
               </form>
-              <span class="text-success">{{submsg}}</span>
-              <span class="text-danger">{{submsgwarn}}</span>
+              <span class="text-success lead">{{submsg}}</span>
+              <span class="text-danger lead">{{submsgwarn}}</span>
             </div>
           </div>
         </div>
