@@ -80,14 +80,16 @@ user_router.post("/stayupdate", async (req, resp) => {
     await useremail.save();
     resp.render("index", { staymsg: "Thanks for Subscribe..!!!" });
   } catch (error) {
-    resp.render("index", { staymsgwarn: "Email already exists..!!!!" });
+    resp.render("index", {
+      staymsgwarn: "Email already exists either invalide email..!!!!",
+    });
   }
 });
 //******************************* User login******************************** */
 user_router.post("/userlogin", async (req, resp) => {
+  const email = req.body.email;
+  const pass = req.body.pass;
   try {
-    const email = req.body.email;
-    const pass = req.body.pass;
     const userdata = await User.findOne({ email: email });
     const isCompare = await bcrypt.compare(pass, userdata.pass);
 
@@ -97,7 +99,7 @@ user_router.post("/userlogin", async (req, resp) => {
 
       const user = await User.findOne({ email: email });
       // console.log(user.Tokens.length);
-      if (user.Tokens.length > 3) {
+      if (user.Tokens.length >= 3) {
         resp.render("login", { loginmsg: "maximum login limit exist !!!" });
       } else {
         resp.cookie("jwt", token);
@@ -112,8 +114,8 @@ user_router.post("/userlogin", async (req, resp) => {
       resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
     }
   } catch (error) {
-    // resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
-    console.log(error);
+    resp.render("login", { loginmsg: "Invalide Username or Password..!!!" });
+    // console.log(error);
   }
 });
 //***************************** Logout****************************************** */

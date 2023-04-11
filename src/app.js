@@ -7,6 +7,8 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const userrouter = require("../router/userrouter");
 const contactrouter = require("../router/contactrouter");
+const productrouter = require("../router/productrouter");
+const adminrouter = require("../router/adminrouter");
 const cookieParser = require("cookie-parser");
 const port = process.env.port || 3000;
 const dburl = process.env.dburl;
@@ -21,7 +23,7 @@ hbs.registerPartials(partialpath);
 app.use(express.static(publicpath));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(express.json());
 //**************************** Server port ************************************** */
 app.listen(port, () => {
   console.log("Server running on port" + " " + port);
@@ -38,3 +40,5 @@ mongoose
   });
 app.use("/", userrouter);
 app.use("/", contactrouter);
+app.use("/product", productrouter);
+app.use("/", adminrouter);
