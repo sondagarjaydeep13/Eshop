@@ -49,6 +49,7 @@ adminSchema.methods.genratetoken = async function (next) {
   this.Tokens = await this.Tokens.concat({ token: token });
   await this.save();
   return token;
+  next();
 };
 
 const Admin = mongoose.model("Admin", adminSchema);
