@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const cartSchema = new mongoose.Schema({
   pid: {
-    type: Number,
+    type: mongoose.Schema.Types.ObjectId,
   },
   userid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
   },
-  addcart: {
+  addDate: {
     type: Date,
     default: Date.now(),
   },

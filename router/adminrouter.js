@@ -1,9 +1,23 @@
 const express = require("express");
 const adminrouter = express.Router();
 const Admin = require("../model/Admin/admin");
+const Product = require("../model/Product/Product");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const adminauth = require("../middleware/adminauth");
+const multer = require("multer");
+
+//*********************** image upload multor*********************** */
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "./public/img");
+  },
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + "_ " + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+//************************** end************************************ */
 
 adminrouter.get("/adminpage", (req, res) => {
   res.render("adminlogin");
@@ -70,5 +84,69 @@ adminrouter.get("/adminlogoutall", adminauth, async (req, res) => {
 });
 adminrouter.get("/addproduct", (req, res) => {
   res.render("addproduct");
+});
+adminrouter.post("/addedproduct", upload.single("file"), async (req, res) => {
+  const pid = await req.body.id;
+
+  try {
+    if (pid == "") {
+      const product = await Product({
+        pid: req.body.pid,
+        pname: req.body.pname,
+        qty: req.body.qty,
+        price: req.body.price,
+        img: req.file.filename,
+      });
+      const productAdded = await product.save();
+      if (productAdded) {
+        res.render("addproduct", {
+          msg: productAdded.pname + " " + "added success !!!",
+        });
+      }
+    } else {
+      const result = await Product.findByIdAndUpdate(pid, {
+        pid: req.body.pid,
+        pname: req.body.pname,
+        qty: req.body.qty,
+        price: req.body.price,
+        img: req.file.filename,
+      });
+      const pdata = await Product.find();
+      res.render("productdetaile", { pdetaile: pdata });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+adminrouter.get("/productdetaile", async (req, res) => {
+  try {
+    const productdetaile = await Product.find();
+
+    res.render("productdetaile", { pdetaile: productdetaile });
+  } catch (error) {
+    console.log(error);
+  }
+});
+adminrouter.get("/productdelete", async (req, res) => {
+  const pid = req.query.did;
+
+  try {
+    const data = await Product.findByIdAndDelete(pid);
+    console.log(data);
+    const productdetaile = await Product.find();
+    res.render("productdetaile", { pdetaile: productdetaile });
+  } catch (error) {
+    console.log(error);
+  }
+});
+adminrouter.get("/productedit", async (req, res) => {
+  const pid = req.query.pid;
+
+  try {
+    const pdetaile = await Product.findById(pid);
+    res.render("addproduct", { pdata: pdetaile });
+  } catch (error) {
+    console.log(error);
+  }
 });
 module.exports = adminrouter;

@@ -6,12 +6,25 @@ const UserStayUpdate = require("../model/User/UserStayUpdate");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-user_router.get("/", (req, resp) => {
+const Product = require("../model/Product/Product");
+const Cart = require("../model/Product/Cart");
+
+user_router.get("/", async (req, resp) => {
   const token = req.cookies.jwt;
-  if (token == undefined) {
-    resp.render("index", { login: "Login" });
-  } else {
-    resp.render("index", { logout: "Logout", logoutall: "Logout all" });
+  try {
+    const productdata = await Product.find();
+
+    if (token == undefined) {
+      resp.render("index", { login: "Login", pdata: productdata });
+    } else {
+      resp.render("index", {
+        logout: "Logout",
+        logoutall: "Logout all",
+        pdata: productdata,
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -89,6 +102,7 @@ user_router.post("/stayupdate", async (req, resp) => {
 user_router.post("/userlogin", async (req, resp) => {
   const email = req.body.email;
   const pass = req.body.pass;
+  const productdata = await Product.find();
   try {
     const userdata = await User.findOne({ email: email });
     const isCompare = await bcrypt.compare(pass, userdata.pass);
@@ -108,6 +122,7 @@ user_router.post("/userlogin", async (req, resp) => {
           logout: "Logout",
           logoutall: "Logout-All",
           udata: userdata.uname,
+          pdata: productdata,
         });
       }
     } else {
@@ -143,6 +158,20 @@ user_router.get("/logoutall", auth, async (req, res) => {
     res.render("index", { login: "Login" });
   } catch (error) {
     console.log(error);
+  }
+});
+//****************************** Product add to cart********************* */
+user_router.get("/addtocart", auth, async (req, res) => {
+  const userid = req.user._id;
+  const pid = req.query.pid;
+  try {
+    const addproduct = await Cart({
+      userid: userid,
+      pid: pid,
+    }).save();
+    res.status(200).send("Product added to cart successfully.");
+  } catch (error) {
+    res.status(500).send("An error occurred while adding the product to cart.");
   }
 });
 

@@ -33,9 +33,14 @@
 
                     </div>
                     <br>
-
-                    <form style="width:300px;margin-left:250px"action="/adduser" method="post">
+                     <span class="text-center">
+                     {{msg}}
+                     </span>
+               
+                    <form style="width:300px;margin-left:250px"action="/addedproduct" method="post" enctype="multipart/form-data">
+                     
                       <span class="text-success lead">{{rgmsg}}</span>
+                       <input type="hidden" name="id" id="id" value="{{pdata._id}}">
                       <div class="form-outline mb-4">
                         <input
                           type="text"
@@ -43,6 +48,7 @@
                           name="pname"
                           class="form-control lead"
                           placeholder="Productname"
+                          value="{{pdata.pname}}"
                         />
                        
                       </div>
@@ -54,6 +60,7 @@
                           name="pid"
                           class="form-control lead"
                           placeholder="Product-ID(set only number)"
+                          value="{{pdata.pid}}"
                         />
                        
                       </div>
@@ -65,6 +72,7 @@
                           id="qty"
                           class="form-control lead"
                           placeholder="Product QTY(number of)"
+                          value="{{pdata.qty}}"
                         />
                        
                       </div>
@@ -76,6 +84,7 @@
                           name="price"
                           class="form-control lead"
                           placeholder="Price(set price)*"
+                          value="{{pdata.price}}"
                         />
                        
                       </div>
@@ -83,9 +92,10 @@
                         <input
                           type="file"
                           id="img"
-                          name="img"
+                          name="file"
                           class="form-control lead"
                           placeholder="Price(set price)*"
+                        
                         />
                          <label
                           class="form-label"

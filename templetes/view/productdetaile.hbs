@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+
+    <div class="container">
+      <h2 class="text-center bg-info text-white">Your Created Product</h2>
+
+      <table style="margin-top: 40px;" class="table">
+
+        <thead>
+          <tr>
+            <th>ProductNum</th>
+            <th>ProductName</th>
+            <th>QTY</th>
+            <th>YourPrice</th>
+            <th>Image</th>
+            <th>AddDate</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each pdetaile}}
+            <tr>
+              <td>{{this.pid}}</td>
+              <td>{{this.pname}}</td>
+              <td>{{this.qty}}</td>
+              <td>{{this.price}}</td>
+              <td><img
+                  height="50px"
+                  src="img/{{this.img}}"
+                  alt=""
+                  srcset=""
+                /></td>
+              <td>{{this.adddate}}</td>
+              <td><a
+                  class="btn btn-success"
+                  href="productedit?pid={{this._id}}"
+                >Edit</a></td>
+              <td><a
+                  class="btn btn-danger"
+                  href="productdelete?did={{this._id}}"
+                >Delete</a></td>
+            </tr>
+          {{/each}}
+        </tbody>
+
+      </table>
+
+    </div>
+  </body>
+</html>
