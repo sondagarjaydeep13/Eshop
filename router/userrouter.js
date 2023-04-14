@@ -37,9 +37,9 @@ user_router.get("/shopdetail", (req, resp) => {
   resp.render("detail");
 });
 //****************************Cart******************************** */
-user_router.get("/cart", auth, (req, resp) => {
-  resp.render("cart");
-});
+// user_router.get("/cart", auth, (req, resp) => {
+//   resp.render("cart");
+// });
 //************************** Check out****************************** */
 user_router.get("/checkout", auth, (req, resp) => {
   resp.render("checkout");
@@ -158,20 +158,6 @@ user_router.get("/logoutall", auth, async (req, res) => {
     res.render("index", { login: "Login" });
   } catch (error) {
     console.log(error);
-  }
-});
-//****************************** Product add to cart********************* */
-user_router.get("/addtocart", auth, async (req, res) => {
-  const userid = req.user._id;
-  const pid = req.query.pid;
-  try {
-    const addproduct = await Cart({
-      userid: userid,
-      pid: pid,
-    }).save();
-    res.status(200).send("Product added to cart successfully.");
-  } catch (error) {
-    res.status(500).send("An error occurred while adding the product to cart.");
   }
 });
 

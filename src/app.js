@@ -40,5 +40,5 @@ mongoose
   });
 app.use("/", userrouter);
 app.use("/", contactrouter);
-app.use("/product", productrouter);
+app.use("/", productrouter);
 app.use("/", adminrouter);

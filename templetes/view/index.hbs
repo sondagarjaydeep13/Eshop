@@ -31,7 +31,7 @@
     <link href="/css/style.css" rel="stylesheet" />
   </head>
 
-  <body>
+  <body onload="getTime()">
     <!-- Topbar Start -->
     <div class="container-fluid">
       <div class="row bg-secondary py-2 px-xl-5">
@@ -54,6 +54,13 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
           <div class="d-inline-flex align-items-center">
+            <a
+              class="btn btn-info"
+              id="currentTime"
+              class="text-dark"
+              href=""
+            >Support</a>
+
             <a class="text-dark px-2" href="">
               <i class="fab fa-facebook-f"></i>
             </a>
@@ -1094,7 +1101,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="/public/js/main.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 
 </html>

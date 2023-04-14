@@ -149,4 +149,5 @@ adminrouter.get("/productedit", async (req, res) => {
     console.log(error);
   }
 });
+
 module.exports = adminrouter;

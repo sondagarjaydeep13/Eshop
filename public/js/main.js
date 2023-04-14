@@ -99,3 +99,11 @@
   });
 })(jQuery);
 
+//**************************** Get time********************************* */
+function getTime() {
+  const currentDates = new Date();
+  const currentDate = currentDates.toDateString();
+  // const Time = currentDate.toLocaleTimeString();
+  document.getElementById("currentTime").innerHTML = currentDate;
+  // document.getElementById("currentTime").innerHTML = Time;
+}
