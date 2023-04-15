@@ -212,49 +212,27 @@
           <table class="table table-bordered text-center mb-0">
             <thead class="bg-secondary text-dark">
               <tr>
+                <th>Image</th>
                 <th>Products</th>
-                <th>Price</th>
+                <th>ProductID</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>Remove</th>
+                <th colspan="2">Action</th>
               </tr>
             </thead>
             <tbody class="align-middle">
               <tr>
-                <td class="align-middle"><img
-                    src="img/product-1.jpg"
-                    alt=""
-                    style="width: 50px;"
-                  />
-                  Colorful Stylish Shirt</td>
-                <td class="align-middle">$150</td>
-                <td class="align-middle">
-                  <div
-                    class="input-group quantity mx-auto"
-                    style="width: 100px;"
-                  >
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-minus">
-                        <i class="fa fa-minus"></i>
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm bg-secondary text-center"
-                      value="1"
-                    />
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-plus">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle">$150</td>
-                <td class="align-middle"><button
-                    class="btn btn-sm btn-primary"
-                  ><i class="fa fa-times"></i></button></td>
-              </tr>
+              {{#each usercart}}
+            
+              <td><img height="50px" src="img/{{this.img}}" alt=""></td>
+                <td>{{this.pname}}</td>
+                <td>{{this.pid}}</td>
+                <td>{{this.qty}}</td>
+                <td>{{this.price}}</td>
+                <td><a class="btn btn-success" href="">Edit</a></td>
+                <td><a class="btn btn-danger" href="deletecart?did={{this._id}}">Delete</a></td>
+</tr>
+              {{/each}}
               {{! <tr>
                 <td class="align-middle"><img
                     src="img/product-2.jpg"
