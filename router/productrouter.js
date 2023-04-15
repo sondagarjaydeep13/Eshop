@@ -31,20 +31,10 @@ p_router.get("/addtocart", auth, async (req, res) => {
   }
 });
 p_router.get("/cart", auth, async (req, res) => {
+  const user = req.user;
   try {
-    const userId = req.user._id; // Retrieve user ID from req.user object
-    const cartData = await Cart.findOne({ user: userId }).populate(
-      "items.product"
-    ); // Find the cart data for the user
-    console.log(cartData);
-    if (!cartData) {
-      return res.status(404).json({ error: "Cart not found" });
-    }
-    const products = cartData.items.map((item) => item.product); // Extract the product data from the cart items
-    return res.json(products);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Internal server error" });
   }
 });
 

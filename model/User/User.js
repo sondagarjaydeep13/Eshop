@@ -1,22 +1,39 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const userSchema = new mongoose.Schema({
   uname: {
     type: String,
     require: true,
+    validate(value) {
+      if (!validator.isAlpha(value)) {
+        throw new Error("User name is not valide");
+      }
+    },
   },
   email: {
     type: String,
     require: true,
     unique: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Email is not valide");
+      }
+    },
   },
   pass: {
     type: String,
     require: true,
+    //   validate(value) {
+    //     if (!validator.isStrongPassword(value, [{ minLength: 8 }])) {
+    //       throw new Error("Password min length 8  require");
+    //     }
+    //   },
   },
   pnumber: {
-    type: String,
+    type: Number,
+    require: true,
   },
   create_date: {
     type: Date,
