@@ -1,7 +1,7 @@
 {
-  "name": "e-shoper-project",
+  "name": "e-shop-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create E-shop project using nodejs",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -11,7 +11,7 @@
     "start": "nodemon src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jaydeep Sondagar",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

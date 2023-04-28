@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const control = require("../controller/control");
 const mongoose = require("mongoose");
 const { mongo } = require("mongoose");
-
+//********************** Only For Check*************************** */
 p_router.post("/addproduct", async (req, res) => {
   try {
     const product = new Product({
@@ -50,13 +50,13 @@ p_router.get("/cart", auth, async (req, res) => {
       },
     ]);
 
-    const usercarts = [];
+    const productdata = [];
+
     for (var i = 0; i < viewcart.length; i++) {
-      usercarts.push(...viewcart[i].Product);
+      productdata.push(...viewcart[i].Product);
     }
 
-    res.render("cart", { usercart: usercarts });
-    // console.log(usercarts);
+    res.render("cart", { usercart: productdata });
   } catch (error) {
     console.log(error);
   }
@@ -65,14 +65,26 @@ p_router.get("/cart", auth, async (req, res) => {
 p_router.get("/deletecart", auth, async (req, res) => {
   const pid = req.query.did;
   const uid = req.user._id;
-  console.log(pid);
+
   try {
-    // const data = await Cart.findById();
+    const data = await Cart.deleteOne({ pid: pid, userid: uid });
     // console.log(data);
-    // const usercarts = await control.cart(uid); // cart() call the function to the controler
-    // res.render("cart", { usercart: usercarts });
+    const usercarts = await control.cart(uid); // cart() call here
+    res.render("cart", { usercart: usercarts });
   } catch (error) {
     console.log(error);
   }
+});
+p_router.get("/editcart", auth, async (req, res) => {
+  const uid = req.user._id;
+  const pid = req.query.eid;
+  // console.log(pid);
+  // console.log(userid);
+  try {
+    const usercarts = await control.cart(uid);
+    usercarts.map((e) => {
+      console.log(e == pid);
+    });
+  } catch (error) {}
 });
 module.exports = p_router;

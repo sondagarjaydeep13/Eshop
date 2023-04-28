@@ -9991,3 +9991,8 @@ a.text-dark:focus {
     transform: translateY(-15px);
   }
 }
+.stickyclass {
+  position: sticky;
+  top: 0px;
+  z-index: 5;
+}

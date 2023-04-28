@@ -216,7 +216,7 @@
                 <th>Products</th>
                 <th>ProductID</th>
                 <th>Quantity</th>
-                <th>Total</th>
+                <th>Price</th>
                 <th colspan="2">Action</th>
               </tr>
             </thead>
@@ -229,7 +229,7 @@
                 <td>{{this.pid}}</td>
                 <td>{{this.qty}}</td>
                 <td>{{this.price}}</td>
-                <td><a class="btn btn-success" href="">Edit</a></td>
+                <td><a class="btn btn-success" href="editcart?eid={{this._id}}">Edit</a></td>
                 <td><a class="btn btn-danger" href="deletecart?did={{this._id}}">Delete</a></td>
 </tr>
               {{/each}}
